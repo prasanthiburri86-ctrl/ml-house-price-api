@@ -13,9 +13,21 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Build Docker image
-      run: docker build -t ml-api .
+    - name: Setup SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H 13.48.84.115 >> ~/.ssh/known_hosts
 
-    - name: Test container
-      run: docker run -d -p 8000:8000 ml-api
-
+    - name: Deploy to EC2
+      run: |
+        ssh ubuntu@13.48.84.115 << 'EOF'
+        cd ml-house-price-api || git clone https://github.com/prasanthiburri86-ctrl/ml-house-price-api.git
+        cd ml-house-price-api
+        git pull
+        sudo docker stop $(sudo docker ps -q) || true
+        sudo docker rm $(sudo docker ps -aq) || true
+        sudo docker build -t ml-api .
+        sudo docker run -d -p 8000:8000 ml-api
+        EOF
