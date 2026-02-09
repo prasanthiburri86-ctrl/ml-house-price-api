@@ -27,12 +27,6 @@ The system predicts house prices based on input size and is deployed as a scalab
 - Docker-based deployment in cloud environment  
 - Remote server management using SSH  
 
-### Kubernetes
-- Container orchestration using Kubernetes  
-- Deployment and service configuration using YAML  
-- Scalable multi-replica deployment  
-- Exposed ML API using NodePort service  
-
 ### CI/CD Automation
 - Implemented GitHub Actions pipeline  
 - Automated Docker build and deployment  
@@ -50,7 +44,6 @@ The system predicts house prices based on input size and is deployed as a scalab
 **MLOps & Backend**
 - FastAPI  
 - Docker  
-- Kubernetes  
 
 **Cloud & DevOps**
 - AWS EC2  
@@ -74,7 +67,7 @@ http://13.48.84.115:8000/docs
 
 
 ## 📊 Project Architecture
-ML Model → FastAPI → Docker → AWS EC2 → Kubernetes → CI/CD (GitHub Actions)
+ML Model → FastAPI → Docker → AWS EC2 → CI/CD (GitHub Actions)
 
 
 ---
